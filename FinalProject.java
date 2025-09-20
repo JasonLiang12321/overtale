@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -120,7 +121,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
     static ArrayList<Integer> spawnNormalEnemyX = new ArrayList<Integer>();
     static String level = "main";
     static Image background;
-    static String overtaleFont = "Wlmsl";
+    Font overtaleFont;
     static int mousePressedX;
     static int mousePressedY;
     static int currentscore;
@@ -216,6 +217,15 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
     
     //adds mouselistener, setup()
     public FinalProjectGame(){
+        try (InputStream ia = getClass().getResourceAsStream("/resources/Wlmsl.ttf")) {
+            overtaleFont = Font.createFont(Font.TRUETYPE_FONT, ia).deriveFont(30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(overtaleFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
         addMouseListener(this);
         addMouseMotionListener(this);
        
@@ -239,7 +249,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         t = new Timer(5,this); 
         t.start();
         try{
-            background = ImageIO.read(new File("OvertaleTitleScreenv4.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/resources/OvertaleTitleScreenv4.png"));
         }catch (IOException e){
             System.out.println(e);
         }
@@ -247,7 +257,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
     //main paint method
     public void paint(Graphics g){
         
-        g.setFont(new Font(overtaleFont, Font.BOLD,30));
+        g.setFont(overtaleFont);
         
       
         //level endless
@@ -255,7 +265,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,1200,750);
         g.setColor(new Color(61, 63, 125));
-        g.setFont(new Font(overtaleFont,Font.BOLD,60));
+        g.setFont(overtaleFont.deriveFont(60f));
          g.drawString("Size: " + me.size, 10,60);
         me.setBorders();
         g.setColor(Color.ORANGE);
@@ -368,13 +378,13 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             
             startScreen(g);
             me.setBorders();
-            g.setFont(new Font(overtaleFont,Font.BOLD, 150));
+            g.setFont(overtaleFont.deriveFont(150f));
             
             g.drawString("Overtale",310,400);
             
-            g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+            g.setFont(overtaleFont.deriveFont(100f));
             if (me.x >= 70 && me.x <= 180 && me.y <= 650 && me.y >= 565){
-                g.setFont(new Font(overtaleFont,Font.BOLD, 125));
+                g.setFont(overtaleFont.deriveFont(125f));
                 g.setColor(Color.GREEN);
                 if(mainMenuSFXCountL1 == 0){
                     SFX.c.setFramePosition(5000);
@@ -385,7 +395,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
                 mainMenuSFXCountL1++;
             }else{
                 g.setColor(Color.WHITE);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+                g.setFont(overtaleFont.deriveFont(100f));
                 
                
                 mainMenuSFXCountL1 = 0;
@@ -398,7 +408,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.drawString("L1",100,650);
             if (me.x >= 320 && me.x <= 430 && me.y <= 650 && me.y >= 565){
                 g.setColor(Color.GREEN);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 125));
+                g.setFont(overtaleFont.deriveFont(125f));
                 if(mainMenuSFXCountL2 == 0){
                     SFX.c.setFramePosition(5000);
                     SFX.play();
@@ -407,7 +417,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
                 mainMenuSFXCountL2++;
             }else{
                 g.setColor(Color.WHITE);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+                g.setFont(overtaleFont.deriveFont(100f));
                 mainMenuSFXCountL2 = 0;
                 
                 
@@ -416,7 +426,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.drawString("L2",310,650);
             if (me.x >= 480 && me.x <= 670 && me.y <= 630 && me.y >= 530){
                 g.setColor(Color.GREEN);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 125));
+                g.setFont(overtaleFont.deriveFont(125f));
                 if(mainMenuSFXCountL3 == 0){
                     SFX.c.setFramePosition(5000);
                     SFX.play();
@@ -426,7 +436,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
 
             }else{
                 g.setColor(Color.WHITE);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+                g.setFont(overtaleFont.deriveFont(100f));
                 mainMenuSFXCountL3 = 0;
                
                 
@@ -434,7 +444,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.drawString("L3", 550,650);
             if (me.x >= 720 && me.x <= 1050 && me.y <= 650 && me.y >= 565){
                 g.setColor(Color.GREEN);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 125));
+                g.setFont(overtaleFont.deriveFont(125f));
                 if(mainMenuSFXCountEndless == 0){
                     SFX.c.setFramePosition(5000);
                     SFX.play();
@@ -443,7 +453,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
                 mainMenuSFXCountEndless++;
             }else{
                 g.setColor(Color.WHITE);
-                g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+                g.setFont(overtaleFont.deriveFont(100f));
                 mainMenuSFXCountEndless = 0;
                
             }
@@ -483,12 +493,12 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1200,750);
             g.setColor(Color.RED);
-            g.setFont(new Font(overtaleFont,Font.BOLD, 150));
+            g.setFont(overtaleFont.deriveFont(150f));
             g.drawString("You Suck", 300,400);
             g.setColor(new Color(123,234,132));
             g.fillRect(350,500,500,100);
             g.setColor(Color.RED);
-            g.setFont(new Font(overtaleFont,Font.BOLD, 50));
+            g.setFont(overtaleFont.deriveFont(50f));
             g.drawString("Press Q to restart", 390,560);
             g.drawString("Score: " +Math.max(Math.max((int)wave,(int)L2Progression),(int)L3Progression),100,100);
             me.size = 30;
@@ -499,11 +509,11 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             me.setBorders();
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1200,750);
-            g.setFont(new Font(overtaleFont,Font.BOLD, 100));
+            g.setFont(overtaleFont.deriveFont(100f));
             g.setColor(new Color(0,163,108));
             
             g.drawString("Welcome to the tutorial",50,350);
-            g.setFont(new Font(overtaleFont,Font.BOLD, 75));
+            g.setFont(overtaleFont.deriveFont(75f));
             g.setColor(new Color(0,200,108));
             if((universalcounter %200 <= 150)){
                 g.drawString("click anywhere to start",200,450);
@@ -514,7 +524,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1200,750);
             g.setColor(new Color(61, 63, 125));
-            g.setFont(new Font(overtaleFont,Font.BOLD,60));
+            g.setFont(overtaleFont.deriveFont(60f));
             g.drawString("Red enemies decreases your size by 1",70,350);
             g.drawString("Size: " + me.size, 10,60);
             g.setColor(Color.ORANGE);
@@ -580,7 +590,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1200,750);
             g.setColor(new Color(61, 63, 125));
-            g.setFont(new Font(overtaleFont,Font.BOLD,60));
+            g.setFont(overtaleFont.deriveFont(60f));
             if (L1totalenemyspawnedheal < 90){
             g.drawString("Reaching a size of 0 results in DEATH", 70 ,350);
             g.drawString("Green blocks heals you by 3", 150,450);
@@ -661,10 +671,10 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         L2Progression += 0.005;
         g.fillRect(0,0,1200,760);
         g.setColor(new Color(224,209,145)); //Color Jazzamoon
-        g.setFont(new Font(overtaleFont,Font.BOLD,60));
+        g.setFont(overtaleFont.deriveFont(60f));
         g.drawString("Size: " + me.size, 10,60);
         g.setColor(Color.PINK);
-        g.setFont(new Font(overtaleFont,Font.BOLD,35));
+        g.setFont(overtaleFont.deriveFont(35f));
         if (L2Progression >= 101){
             level = "L2WinScreen";
         }
@@ -793,7 +803,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,1200,760);
         g.setColor(new Color(224,209,145)); //Color Jazzamoon
-        g.setFont(new Font(overtaleFont,Font.BOLD,100));
+        g.setFont(overtaleFont.deriveFont(100f));
         g.drawString("Good Job...",300,330);
         g.drawString("Now try L3...", 350,450);
 
@@ -806,10 +816,10 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
          L3Progression += 0.005;
          g.fillRect(0,0,1200,760);
          g.setColor(new Color(224,209,145)); //Color Jazzamoon
-         g.setFont(new Font(overtaleFont,Font.BOLD,60));
+         g.setFont(overtaleFont.deriveFont(60f));
          g.drawString("Size: " + me.size, 10,60);
          g.setColor(Color.PINK);
-         g.setFont(new Font(overtaleFont,Font.BOLD,35));
+         g.setFont(overtaleFont.deriveFont(35f));
          if (L3Progression >= 101){
              level = "L3WinScreen";
          }
@@ -944,13 +954,13 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
          }
          if (L3Progression < 75 && L3Progression > 70){
              g.setColor(new Color(224,209,145)); //Color Jazzamoon
-             g.setFont(new Font(overtaleFont,Font.BOLD,100));
+             g.setFont(overtaleFont.deriveFont(100f));
              g.drawString("You are almost there!", 70,400);
             
          }
          if (L3Progression < 80 && L3Progression >75){
             g.setColor(new Color(224,209,145)); //Color Jazzamoon
-            g.setFont(new Font(overtaleFont,Font.BOLD,100));
+            g.setFont(overtaleFont.deriveFont(100f));
             g.drawString("For the last stage:", 175,400);
             g.drawString("HINT:Left 1", 350,500);
          }
@@ -975,7 +985,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,1200,760);
         g.setColor(new Color(224,209,145)); //Color Jazzamoon
-        g.setFont(new Font(overtaleFont,Font.BOLD,70));
+        g.setFont(overtaleFont.deriveFont(70f));
         g.drawString("You beat the hardest level!", 110,400);
         
     }
@@ -1083,15 +1093,15 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         AudioInputStream SoundE;
         public void setFile(String name){
             try{
-                File file = new File(name);
-                SoundE = AudioSystem.getAudioInputStream(file);
+                InputStream is = getClass().getResourceAsStream("resources/" + name);
+                SoundE = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
                 c = AudioSystem.getClip();
                 c.open(SoundE);
 
 
 
             }catch(Exception E){
-                System.out.print(E);
+                E.printStackTrace();
             }
         }
         public void play(){
