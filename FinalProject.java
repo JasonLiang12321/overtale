@@ -139,10 +139,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
     static boolean L2Wave3Boolean = true;
     static double L3Progression = 0;
     static boolean L3Boolean = true;
-    static Clip creditsMusic = null;
-    static Image credgif;
-    static Image cred1;
-    static boolean creditsrolling = false;
+    
     
 
 
@@ -251,9 +248,8 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
     public void paint(Graphics g){
         
         g.setFont(new Font(overtaleFont, Font.BOLD,30));
-        if (creditsrolling){
-            credits(g);
-        }else{
+        
+      
         //level endless
         if (level == "endless"){ 
         g.setColor(Color.BLACK);
@@ -987,7 +983,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
         mousePressedY = 0;
         universalcounter++;
     }
-}
+
 
 
         
@@ -1070,14 +1066,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
 
    
         }
-        if(e.getKeyChar() == 'c'){
-            if (creditsrolling && level == "main"){
-                creditsMusic.stop();
-            }
-            if(level == "main"){
-            creditsrolling = !creditsrolling;
-            }
-        }
+       
    
       }
     public void keyReleased(KeyEvent e){
@@ -1088,58 +1077,7 @@ class FinalProjectGame extends JPanel implements MouseListener, ActionListener, 
        
 
     }
-    //Additional Code not included in the final submission, made by Mac
-       public void JasonCreditsTest()
-    {
-        
-        try
-        {
-            cred1 = ImageIO.read(new File("cred1.png"));
-            credgif = Toolkit.getDefaultToolkit().createImage("credsgif.gif");
-        }
-        catch (IOException e)
-        {
-            
-        }
-    }
-    
-   
-    
-    public void creditsMusic()
-    {
-        try
-        {
-            
-            File creditsMusicFile = new File ("creditsmusic.wav");
-               if (creditsMusic == null || !creditsMusic.isRunning())
-                {
-            creditsMusic = AudioSystem.getClip();
-            creditsMusic.open(AudioSystem.getAudioInputStream(creditsMusicFile));
-            creditsMusic.start();
-            }
-            else
-            return;
-        }
-        catch (IOException | UnsupportedAudioFileException | LineUnavailableException h)
-        {
-            h.printStackTrace();
-        }
-    }
-    
-    public void credits(Graphics g)
-    {
-        creditsMusic();
-        JasonCreditsTest();
 
-        g.drawImage(cred1, 0, 0, this);
-        
-    }
-
-
-    
-    //End of code made by Mac
-
-    //class of music, adds music to the game
     public class Music{
         Clip c;
         AudioInputStream SoundE;
