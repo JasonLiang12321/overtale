@@ -32,7 +32,7 @@ The levels gets really difficult
 
 <h2>IMAGES</h2>
 
-![GameScreenshot](OvertaleMain.png)
-![GameScreenshot](4.png)
+![GameScreenshot](/READMEIMAGES/OvertaleMain.png)
+![GameScreenshot](/READMEIMAGES/4.png)
 
 
